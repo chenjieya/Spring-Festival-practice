@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		html,
+		body {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		#app {
+			width: 200px;
+			height: 200px;
+			border: 3px solid #f40;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app"></div>
+	<script>
+		const bom = document.getElementById('app');
+
+		function getBoxDirection(bom) {
+			// 绑定鼠标移入事件
+			bom.onmouseenter = function(e) {
+				// console.log(e.clientX)
+
+				const bomInfo = this.getBoundingClientRect();
+				const l = bomInfo.left;
+				const t = bomInfo.top;
+				const w = bomInfo.width;
+				const h = bomInfo.height;
+				
+				// Math.atan2(y, x)  y:鼠标到x轴正向的垂直距离， x是鼠标到中心点的横向距离 返回的是弧度
+				const x = e.clientX - (l + w/2);
+				const y = e.clientY - (t + h/2);
+
+				const deg = Math.atan2(y, x) * 180 / Math.PI; // 根据弧度得出角度
+
+				// deg + 180 是为了出现360度的角
+				const dir = (Math.round((deg + 180) / 90) + 3) % 4; // 0 1 2 3(算法参考图片)
+
+				switch(dir) {
+					case 0:
+						console.log('鼠标从盒子上方移入');
+						break;
+					case 1:
+						console.log('鼠标从盒子右侧移入');
+						break;
+					case 2:
+						console.log('鼠标从盒子下方移入');
+						break;
+					case 3:
+						console.log('鼠标从盒子的左侧移入');
+						break;
+				}
+
+			}
+		}
+		getBoxDirection(bom);
+	</script>
+</body>
+
+</html>
