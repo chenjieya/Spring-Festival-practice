@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+
+
+		/**
+		 * @param { String } num
+		 * @return 数字对应的字母的组合，返回的数组
+		*/
+		function numberToWord(num) {
+			if(num.indexOf(0) != -1 || num.indexOf(1) != -1) return alert('禁止包含0和1');
+			let arr = [];
+			// 数字和字母的对应关系
+			const phoneKey = {
+				2: ['a', 'b', 'c'],
+				3: ['d', 'e', 'f'],
+				4: ['g', 'h', 'i'],
+				5: ['j', 'k', 'l'],
+				6: ['m', 'n', 'o'],
+				7: ['p', 'q', 'r', 's'],
+				8: ['t', 'u', 'v'],
+				9: ['w', 'x', 'y', 'z']
+			}
+			abs('', num);
+			return arr;
+			function abs(str, num) {
+				if(num.length == 0) {
+					return arr.push(str);
+				} else {
+					const firstNum = num[0];
+					const numStr = phoneKey[firstNum]; 
+
+					for(let i = 0;i < numStr.length; i++) {
+						str += numStr[i];
+						abs(str, num.slice(1));
+						// 回溯，在回调完成的时候删除最后一位，然后再准备下一次的回调
+						str = str.slice(0, -1);
+					}
+				}
+			}
+		}
+		console.time('time');
+		console.log(numberToWord('2345445646456456'))
+		console.timeEnd('time');
+	</script>
+</body>
+
+</html>
