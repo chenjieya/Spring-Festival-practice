@@ -2,7 +2,7 @@
  * @Author: chenjie
  * @Email: 18822126754@163.com
  * @Date: 2022-04-09 15:08:02
- * @LastEditTime: 2022-04-09 15:40:01
+ * @LastEditTime: 2022-04-22 14:57:59
  * @Description: 
  */
 
@@ -97,3 +97,13 @@ function fn(a){
  * b = fucntion() {} ,b被赋值，所以打印出函数
  * console.log(b); // function b() {}
  */
+
+
+var arr = [{a:1}, {b:1}, {c:2}, {d:4}];
+for(let i = arr.length - 1; i >= 0; i--) {
+    if(arr[i].b === 1 || arr[i].d === 4) {
+        arr.splice(i, 1);
+    }
+}
+
+console.log(arr);
